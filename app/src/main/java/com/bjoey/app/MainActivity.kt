@@ -3,21 +3,15 @@ package com.bjoey.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.bjoey.app.ui.AppNavHost
+import androidx.compose.ui.unit.sp
 
-/**
- * ============================================================================
- * NEXT.JS / REACT NATIVE ANALOGY:
- * File ini adalah Root Entry Point (Setara dengan `App.tsx` di Expo / `_app.tsx`).
- *
- * Di sini Android Activity menginisialisasi Compose UI melalui `setContent { ... }`
- * dan merender `AppNavHost` yang menjadi pengatur seluruh rute aplikasi.
- * ============================================================================
- */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +21,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AppNavHost()
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "hello world",
+                            fontSize = 32.sp
+                        )
+                    }
                 }
             }
         }
