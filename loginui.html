@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Waiter Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#C02C12',
+                        'brand-dark': '#9E2209',
+                        'brand-light': '#E84B2E',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        html,
+        body {
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior: none;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .key-btn {
+            transition: transform .08s ease, background-color .15s ease, box-shadow .15s ease;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .key-btn:active {
+            transform: scale(0.92);
+            background-color: #C02C12;
+            color: #fff;
+            box-shadow: 0 0 0 8px rgba(192, 44, 18, 0.10);
+        }
+
+        .key-btn-fn:active {
+            background-color: #FEE2E2;
+            color: #C02C12;
+            box-shadow: 0 0 0 8px rgba(192, 44, 18, 0.06);
+        }
+
+        .dot {
+            transition: background-color .2s ease, transform .2s ease, border-color .2s ease;
+        }
+
+        .dot.filled {
+            background-color: #C02C12;
+            border-color: #C02C12;
+            transform: scale(1.1);
+        }
+
+        .shake {
+            animation: shake .4s ease;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-8px);
+            }
+
+            40% {
+                transform: translateX(8px);
+            }
+
+            60% {
+                transform: translateX(-6px);
+            }
+
+            80% {
+                transform: translateX(6px);
+            }
+        }
+
+        .carousel-img {
+            transition: opacity .5s ease;
+        }
+
+        /* hide scrollbars */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+
+    <div class="flex h-screen w-screen overflow-hidden">
+
+        <!-- LEFT: Branding & Showcase -->
+        <section
+            class="relative w-1/2 h-full bg-brand text-white flex flex-col justify-between p-10 lg:p-14 overflow-hidden">
+            <!-- decorative blobs -->
+            <div
+                class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-brand-light opacity-20 blur-3xl pointer-events-none">
+            </div>
+            <div
+                class="absolute -bottom-32 -right-20 w-[28rem] h-[28rem] rounded-full bg-brand-dark opacity-30 blur-3xl pointer-events-none">
+            </div>
+
+            <!-- Top: brand mark -->
+            <div class="relative z-10 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M6 11v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-9" />
+                        <path d="M9 3v2M15 3v2" />
+                    </svg>
+                </div>
+                <span class="text-lg font-semibold tracking-wide">Tavola</span>
+            </div>
+
+            <!-- Middle: headline + showcase card -->
+            <div class="relative z-10 flex flex-col gap-8">
+                <div>
+                    <h1 class="text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+                        Welcome to Your<br />Restaurant
+                    </h1>
+                    <p class="mt-4 text-white/80 text-lg max-w-md leading-relaxed">
+                        A smarter dining experience for staff and guests. Take orders, manage tables, and deliver
+                        delight — all from one place.
+                    </p>
+                </div>
+
+                <!-- Showcase carousel card -->
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-3 shadow-2xl ring-1 ring-white/15">
+                    <div class="relative rounded-2xl overflow-hidden aspect-[16/10] bg-white/5">
+                        <img id="carouselImg"
+                            src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80"
+                            alt="Restaurant showcase" class="carousel-img w-full h-full object-cover opacity-100" />
+
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+                            <span class="carousel-dot w-2 h-2 rounded-full bg-white transition-all duration-300"></span>
+                            <span
+                                class="carousel-dot w-2 h-2 rounded-full bg-white/40 transition-all duration-300"></span>
+                            <span
+                                class="carousel-dot w-2 h-2 rounded-full bg-white/40 transition-all duration-300"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom: small feature pills -->
+            <div class="relative z-10 flex gap-3 text-sm text-white/80">
+                <div class="flex items-center gap-2 bg-white/10 rounded-full px-3 py-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    Tableside ordering
+                </div>
+                <div class="flex items-center gap-2 bg-white/10 rounded-full px-3 py-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    Real-time sync
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT: PIN Keypad -->
+        <section class="relative w-1/2 h-full bg-white flex flex-col items-center px-8 py-8">
+
+            <!-- Top: logo top-right -->
+            <div class="w-full flex justify-end">
+                <div class="flex items-center gap-2 text-brand">
+                    <div class="w-9 h-9 rounded-xl bg-brand/10 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M6 11v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-9" />
+                            <path d="M9 3v2M15 3v2" />
+                        </svg>
+                    </div>
+                    <span class="font-bold text-base tracking-tight">Tavola</span>
+                </div>
+            </div>
+
+            <!-- Header -->
+            <div class="text-center mt-6 mb-5">
+                <h2 class="text-3xl font-bold text-gray-900 tracking-tight">Waiter Login</h2>
+                <p class="text-gray-500 mt-1.5 text-base">Enter your PIN to continue</p>
+            </div>
+
+            <!-- PIN indicators -->
+            <div id="pinDots" class="flex items-center gap-5 mb-7">
+                <span class="dot w-4 h-4 rounded-full border-2 border-gray-300 bg-transparent"></span>
+                <span class="dot w-4 h-4 rounded-full border-2 border-gray-300 bg-transparent"></span>
+                <span class="dot w-4 h-4 rounded-full border-2 border-gray-300 bg-transparent"></span>
+                <span class="dot w-4 h-4 rounded-full border-2 border-gray-300 bg-transparent"></span>
+            </div>
+
+            <!-- Status message -->
+            <div id="statusMsg" class="h-5 text-sm text-gray-400 mb-2 transition-colors"></div>
+
+            <!-- Keypad -->
+            <div class="grid grid-cols-3 gap-x-8 gap-y-4">
+                <!-- 1 -->
+                <button data-key="1"
+                    class="key-btn w-20 h-20 rounded-full bg-gray-50 text-gray-800 text-2xl font-semibold flex items-center justify-center shadow-sm border border-gray-100">1</button>
+                <!-- 2 -->
+                <button data-key="2"
+                    class="key-btn w-20 h-20 rounded-full bg-gray-50 text-gray-800 text-2xl font-semibold flex items-center justify-center shadow-sm border border-gray-100">2</button>
+                <!-- 3 -->
+                <button data-key="3"
+                    class="key-btn w-20 h-20 rounded-full bg-gray-50 text-gray-800 text-2xl font-semibold flex items-center justify-center shadow-sm border border-gray-100">3</button>
+                <!-- 4 -->
+                <button data-key="4"
+                    class="key-btn w-20 h-20 rounded-full bg-gray-50 text-gray-800 text-2xl font-semibold flex items-center justify-center shadow-sm border border-gray-100">4</button>
+                <!-- 5 -->
+                <button data-key="5"
+                    class="key-btn w-20 h-20 rounded-full bg-gray-50 text-gray-800 text-2xl font-semibold flex items-center justify-center shadow-sm border border-gray-100">5</button>
+                <!-- 6 -->
+                <button data-key="6"
+                    class="key-btn w-20 h-20 rounded-full bg-gray-50 text-gray-800 text-2xl font-semibold flex items-center justify-center shadow-sm border border-gray-100">6</button>
+                <!-- 7 -->
+                <button data-key="7"
+                    class="key-btn w-20 h-20 rounded-full bg-gray-50 text-gray-800 text-2xl font-semibold flex items-center justify-center shadow-sm border border-gray-100">7</button>
+                <!-- 8 -->
+                <button data-key="8"
+                    class="key-btn w-20 h-20 rounded-full bg-gray-50 text-gray-800 text-2xl font-semibold flex items-center justify-center shadow-sm border border-gray-100">8</button>
+                <!-- 9 -->
+                <button data-key="9"
+                    class="key-btn w-20 h-20 rounded-full bg-gray-50 text-gray-800 text-2xl font-semibold flex items-center justify-center shadow-sm border border-gray-100">9</button>
+                <!-- * -->
+                <button data-key="*"
+                    class="key-btn key-btn-fn w-20 h-20 rounded-full bg-gray-50 text-gray-500 text-3xl font-medium flex items-center justify-center shadow-sm border border-gray-100">*</button>
+                <!-- 0 -->
+                <button data-key="0"
+                    class="key-btn w-20 h-20 rounded-full bg-gray-50 text-gray-800 text-2xl font-semibold flex items-center justify-center shadow-sm border border-gray-100">0</button>
+                <!-- Backspace -->
+                <button data-action="backspace"
+                    class="key-btn key-btn-fn w-20 h-20 rounded-full bg-gray-50 text-gray-600 flex items-center justify-center shadow-sm border border-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 5H8L2 12l6 7h13a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z" />
+                        <line x1="18" y1="9" x2="12" y2="15" />
+                        <line x1="12" y1="9" x2="18" y2="15" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="absolute bottom-4 left-0 right-0 text-center text-xs text-gray-300 px-6">
+                &copy; 2026 Tavola POS. All rights reserved. For staff use only.
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // -------- PIN state --------
+        const PIN_LENGTH = 4;
+        let pin = '';
+
+        const dots = document.querySelectorAll('#pinDots .dot');
+        const statusMsg = document.getElementById('statusMsg');
+        const keypad = document.querySelector('.grid.grid-cols-3');
+
+        function renderDots() {
+            dots.forEach((d, i) => {
+                if (i < pin.length) d.classList.add('filled');
+                else d.classList.remove('filled');
+            });
+        }
+
+        function setStatus(msg, type) {
+            statusMsg.textContent = msg || '';
+            statusMsg.classList.remove('text-gray-400', 'text-brand', 'text-green-500');
+            if (type === 'error') statusMsg.classList.add('text-brand');
+            else if (type === 'success') statusMsg.classList.add('text-green-500');
+            else statusMsg.classList.add('text-gray-400');
+        }
+
+        function onComplete() {
+            // Demo: PIN 1234 is the valid one. Otherwise show error.
+            setStatus('Verifying…', 'info');
+            setTimeout(() => {
+                if (pin === '1234') {
+                    setStatus('PIN accepted ✓', 'success');
+                } else {
+                    setStatus('Incorrect PIN, try again', 'error');
+                    const dotsWrap = document.getElementById('pinDots');
+                    dotsWrap.classList.add('shake');
+                    setTimeout(() => dotsWrap.classList.remove('shake'), 400);
+                    pin = '';
+                    renderDots();
+                }
+            }, 400);
+        }
+
+        function pressDigit(d) {
+            if (pin.length >= PIN_LENGTH) return;
+            pin += d;
+            renderDots();
+            setStatus('', 'info');
+            if (pin.length === PIN_LENGTH) onComplete();
+        }
+
+        function pressBackspace() {
+            if (pin.length === 0) return;
+            pin = pin.slice(0, -1);
+            renderDots();
+            setStatus('', 'info');
+        }
+
+        function pressStar() {
+            // Optional: clear all
+            pin = '';
+            renderDots();
+            setStatus('Cleared', 'info');
+        }
+
+        // Event delegation on the keypad
+        keypad.addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            if (btn.dataset.key !== undefined) {
+                if (btn.dataset.key === '*') pressStar();
+                else pressDigit(btn.dataset.key);
+            } else if (btn.dataset.action === 'backspace') {
+                pressBackspace();
+            }
+        });
+
+        // Keyboard support (useful for testing on desktop)
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '0' && e.key <= '9') pressDigit(e.key);
+            else if (e.key === 'Backspace') pressBackspace();
+            else if (e.key === '*') pressStar();
+        });
+
+        // -------- Carousel --------
+        const slides = [
+            'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80'
+        ];
+        const carouselDots = document.querySelectorAll('.carousel-dot');
+        const carouselImg = document.getElementById('carouselImg');
+        let slide = 0;
+        setInterval(() => {
+            slide = (slide + 1) % slides.length;
+            carouselImg.style.opacity = '0';
+            setTimeout(() => {
+                carouselImg.src = slides[slide];
+                carouselImg.style.opacity = '1';
+            }, 250);
+            carouselDots.forEach((d, i) => {
+                d.classList.toggle('bg-white', i === slide);
+                d.classList.toggle('bg-white/40', i !== slide);
+                d.classList.toggle('w-5', i === slide);
+            });
+        }, 3500);
+
+        renderDots();
+    </script>
+</body>
+
+</html>
