@@ -20,7 +20,7 @@
 15-->[androidx.core:core:1.12.0] /Users/Bjoey/.gradle/caches/transforms-4/ea3df0294d03aef598c6eca03c452a36/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
 16
 17    <application
-17-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:3:5-10:19
+17-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:3:5-13:19
 18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 18-->[androidx.core:core:1.12.0] /Users/Bjoey/.gradle/caches/transforms-4/ea3df0294d03aef598c6eca03c452a36/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
 19        android:debuggable="true"
@@ -30,88 +30,99 @@
 22        android:theme="@android:style/Theme.Material.Light.NoActionBar" >
 22-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:3:52-115
 23        <activity
-23-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:4:9-9:20
+23-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:4:9-12:20
 24            android:name="com.bjoey.app.MainActivity"
-24-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:4:19-47
-25            android:exported="true" >
-25-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:4:48-71
-26            <intent-filter>
-26-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:5:13-8:29
-27                <action android:name="android.intent.action.MAIN" />
-27-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:6:17-69
-27-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:6:25-66
-28
-29                <category android:name="android.intent.category.LAUNCHER" />
-29-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:7:17-77
-29-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:7:27-74
-30            </intent-filter>
-31        </activity>
-32
-33        <provider
-33-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
-34            android:name="androidx.startup.InitializationProvider"
-34-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:25:13-67
-35            android:authorities="com.bjoey.app.androidx-startup"
-35-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:26:13-68
-36            android:exported="false" >
-36-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:27:13-37
-37            <meta-data
-37-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
-38                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-38-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:30:17-75
-39                android:value="androidx.startup" />
-39-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:31:17-49
-40            <meta-data
-40-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/Bjoey/.gradle/caches/transforms-4/85b1bbe0f524a459db022dea1354143e/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
-41                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-41-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/Bjoey/.gradle/caches/transforms-4/85b1bbe0f524a459db022dea1354143e/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
-42                android:value="androidx.startup" />
-42-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/Bjoey/.gradle/caches/transforms-4/85b1bbe0f524a459db022dea1354143e/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
-43            <meta-data
-43-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
-44                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-44-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
-45                android:value="androidx.startup" />
-45-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
-46        </provider>
-47
-48        <receiver
-48-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
-49            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-49-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
-50            android:directBootAware="false"
-50-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
-51            android:enabled="true"
-51-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
-52            android:exported="true"
-52-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
-53            android:permission="android.permission.DUMP" >
-53-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
-54            <intent-filter>
-54-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
-55                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-55-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
-55-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
-56            </intent-filter>
-57            <intent-filter>
-57-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
-58                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-58-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
-58-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
-59            </intent-filter>
+24-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:5:13-41
+25            android:exported="true"
+25-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:6:13-36
+26            android:screenOrientation="sensorLandscape" >
+26-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:7:13-56
+27            <intent-filter>
+27-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:8:13-11:29
+28                <action android:name="android.intent.action.MAIN" />
+28-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:9:17-69
+28-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:9:25-66
+29
+30                <category android:name="android.intent.category.LAUNCHER" />
+30-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:10:17-77
+30-->/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:10:27-74
+31            </intent-filter>
+32        </activity>
+33
+34        <provider
+34-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+35            android:name="androidx.startup.InitializationProvider"
+35-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:25:13-67
+36            android:authorities="com.bjoey.app.androidx-startup"
+36-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:26:13-68
+37            android:exported="false" >
+37-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:27:13-37
+38            <meta-data
+38-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+39                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+39-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:30:17-75
+40                android:value="androidx.startup" />
+40-->[androidx.emoji2:emoji2:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/f0e9752f9e7132bb7aa18b8b050520df/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:31:17-49
+41            <meta-data
+41-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/Bjoey/.gradle/caches/transforms-4/9eeddb8b65d77d757abbcd628717a2d1/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
+42                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+42-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/Bjoey/.gradle/caches/transforms-4/9eeddb8b65d77d757abbcd628717a2d1/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
+43                android:value="androidx.startup" />
+43-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/Bjoey/.gradle/caches/transforms-4/9eeddb8b65d77d757abbcd628717a2d1/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
+44            <meta-data
+44-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+45                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+45-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+46                android:value="androidx.startup" />
+46-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+47        </provider>
+48
+49        <service
+49-->[androidx.room:room-runtime:2.6.1] /Users/Bjoey/.gradle/caches/transforms-4/ccaf83614be97eff5f6799ed08b77aff/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
+50            android:name="androidx.room.MultiInstanceInvalidationService"
+50-->[androidx.room:room-runtime:2.6.1] /Users/Bjoey/.gradle/caches/transforms-4/ccaf83614be97eff5f6799ed08b77aff/transformed/room-runtime-2.6.1/AndroidManifest.xml:25:13-74
+51            android:directBootAware="true"
+51-->[androidx.room:room-runtime:2.6.1] /Users/Bjoey/.gradle/caches/transforms-4/ccaf83614be97eff5f6799ed08b77aff/transformed/room-runtime-2.6.1/AndroidManifest.xml:26:13-43
+52            android:exported="false" />
+52-->[androidx.room:room-runtime:2.6.1] /Users/Bjoey/.gradle/caches/transforms-4/ccaf83614be97eff5f6799ed08b77aff/transformed/room-runtime-2.6.1/AndroidManifest.xml:27:13-37
+53
+54        <receiver
+54-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+55            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+55-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+56            android:directBootAware="false"
+56-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+57            android:enabled="true"
+57-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+58            android:exported="true"
+58-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+59            android:permission="android.permission.DUMP" >
+59-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
 60            <intent-filter>
-60-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
-61                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-61-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
-61-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+60-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+61                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+61-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+61-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
 62            </intent-filter>
 63            <intent-filter>
-63-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
-64                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-64-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
-64-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+63-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+64                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+64-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+64-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
 65            </intent-filter>
-66        </receiver>
-67    </application>
-68
-69</manifest>
+66            <intent-filter>
+66-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+67                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+67-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+67-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+68            </intent-filter>
+69            <intent-filter>
+69-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+70                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+70-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+70-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/Bjoey/.gradle/caches/transforms-4/96b8288fdaeb3bcd0df20be63d7d1f5e/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+71            </intent-filter>
+72        </receiver>
+73    </application>
+74
+75</manifest>

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.bjoey.app-mergeDebugResources-44:/values-bn/values-bn.xml",
+            "outputFile": "com.bjoey.app-mergeDebugResources-49:/values-bn/values-bn.xml",
             "map": [
                 {
                     "source": "/Users/Bjoey/.gradle/caches/transforms-4/d54a86b004d8ca7dd26b78a44291d4a2/transformed/jetified-ui-release/res/values-bn/values-bn.xml",
