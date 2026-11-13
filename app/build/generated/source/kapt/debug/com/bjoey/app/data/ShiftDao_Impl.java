@@ -35,6 +35,8 @@ public final class ShiftDao_Impl implements ShiftDao {
 
   private final EntityInsertionAdapter<ShiftSessionEntity> __insertionAdapterOfShiftSessionEntity;
 
+  private final SharedSQLiteStatement __preparedStmtOfMarkSessionAsSynced;
+
   private final SharedSQLiteStatement __preparedStmtOfCloseOpenSessions;
 
   public ShiftDao_Impl(@NonNull final RoomDatabase __db) {
@@ -68,7 +70,7 @@ public final class ShiftDao_Impl implements ShiftDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `shift_sessions` (`id`,`shiftId`,`openedAt`,`closedAt`) VALUES (?,?,?,?)";
+        return "INSERT OR REPLACE INTO `shift_sessions` (`id`,`shiftId`,`openedAt`,`closedAt`,`isSynced`) VALUES (?,?,?,?,?)";
       }
 
       @Override
@@ -86,6 +88,16 @@ public final class ShiftDao_Impl implements ShiftDao {
         } else {
           statement.bindLong(4, entity.getClosedAt());
         }
+        final int _tmp = entity.isSynced() ? 1 : 0;
+        statement.bindLong(5, _tmp);
+      }
+    };
+    this.__preparedStmtOfMarkSessionAsSynced = new SharedSQLiteStatement(__db) {
+      @Override
+      @NonNull
+      public String createQuery() {
+        final String _query = "UPDATE shift_sessions SET isSynced = 1 WHERE id = ?";
+        return _query;
       }
     };
     this.__preparedStmtOfCloseOpenSessions = new SharedSQLiteStatement(__db) {
@@ -131,6 +143,36 @@ public final class ShiftDao_Impl implements ShiftDao {
           return Unit.INSTANCE;
         } finally {
           __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object markSessionAsSynced(final String sessionId,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        final SupportSQLiteStatement _stmt = __preparedStmtOfMarkSessionAsSynced.acquire();
+        int _argIndex = 1;
+        if (sessionId == null) {
+          _stmt.bindNull(_argIndex);
+        } else {
+          _stmt.bindString(_argIndex, sessionId);
+        }
+        try {
+          __db.beginTransaction();
+          try {
+            _stmt.executeUpdateDelete();
+            __db.setTransactionSuccessful();
+            return Unit.INSTANCE;
+          } finally {
+            __db.endTransaction();
+          }
+        } finally {
+          __preparedStmtOfMarkSessionAsSynced.release(_stmt);
         }
       }
     }, $completion);

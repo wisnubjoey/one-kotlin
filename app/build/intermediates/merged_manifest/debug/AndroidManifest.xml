@@ -8,6 +8,8 @@
         android:minSdkVersion="26"
         android:targetSdkVersion="34" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <permission
         android:name="com.bjoey.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
@@ -19,7 +21,8 @@
         android:debuggable="true"
         android:extractNativeLibs="false"
         android:label="Panda Cash Drawer"
-        android:theme="@android:style/Theme.Material.Light.NoActionBar" >
+        android:theme="@android:style/Theme.Material.Light.NoActionBar"
+        android:usesCleartextTraffic="true" >
         <activity
             android:name="com.bjoey.app.MainActivity"
             android:exported="true"

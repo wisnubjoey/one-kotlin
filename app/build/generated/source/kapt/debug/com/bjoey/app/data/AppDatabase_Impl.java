@@ -31,13 +31,13 @@ public final class AppDatabase_Impl extends AppDatabase {
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `shifts` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `pin` TEXT NOT NULL, `isActive` INTEGER NOT NULL)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS `shift_sessions` (`id` TEXT NOT NULL, `shiftId` INTEGER NOT NULL, `openedAt` INTEGER NOT NULL, `closedAt` INTEGER, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `shift_sessions` (`id` TEXT NOT NULL, `shiftId` INTEGER NOT NULL, `openedAt` INTEGER NOT NULL, `closedAt` INTEGER, `isSynced` INTEGER NOT NULL, PRIMARY KEY(`id`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a98ad2fe9466feae1aa30f2d2721d47a')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b8d0e500c0c2a829c7a56e56ca70f2a7')");
       }
 
       @Override
@@ -101,11 +101,12 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoShifts + "\n"
                   + " Found:\n" + _existingShifts);
         }
-        final HashMap<String, TableInfo.Column> _columnsShiftSessions = new HashMap<String, TableInfo.Column>(4);
+        final HashMap<String, TableInfo.Column> _columnsShiftSessions = new HashMap<String, TableInfo.Column>(5);
         _columnsShiftSessions.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsShiftSessions.put("shiftId", new TableInfo.Column("shiftId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsShiftSessions.put("openedAt", new TableInfo.Column("openedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsShiftSessions.put("closedAt", new TableInfo.Column("closedAt", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsShiftSessions.put("isSynced", new TableInfo.Column("isSynced", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysShiftSessions = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesShiftSessions = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoShiftSessions = new TableInfo("shift_sessions", _columnsShiftSessions, _foreignKeysShiftSessions, _indicesShiftSessions);
@@ -117,7 +118,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "a98ad2fe9466feae1aa30f2d2721d47a", "3d09c6ab1de177c59fae8ad2e0dd1606");
+    }, "b8d0e500c0c2a829c7a56e56ca70f2a7", "0419a2d488e2c7d1037ac9996c3465fb");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
