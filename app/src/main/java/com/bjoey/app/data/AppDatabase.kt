@@ -32,7 +32,13 @@ data class ShiftSessionEntity(
     val id: String = UUID.randomUUID().toString(),
     val shiftId: Int,
     val openedAt: Long = System.currentTimeMillis(),
-    val closedAt: Long? = null
+    val closedAt: Long? = null,
+    val isSynced: Boolean = false
+)
+
+data class StartedShiftSession(
+    val shift: ShiftEntity,
+    val session: ShiftSessionEntity
 )
 
 @Dao
@@ -49,37 +55,42 @@ interface ShiftDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSession(session: ShiftSessionEntity)
 
+    @Query("UPDATE shift_sessions SET isSynced = 1 WHERE id = :sessionId")
+    suspend fun markSessionAsSynced(sessionId: String)
+
     @Query("UPDATE shift_sessions SET closedAt = :closedAt WHERE closedAt IS NULL")
     suspend fun closeOpenSessions(closedAt: Long = System.currentTimeMillis())
 }
 
 @Database(
     entities = [ShiftEntity::class, ShiftSessionEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun shiftDao(): ShiftDao
 
-    suspend fun verifyPinAndStartSession(pin: String): ShiftEntity? = withContext(Dispatchers.IO) {
+    suspend fun verifyPinAndStartSession(pin: String): StartedShiftSession? = withContext(Dispatchers.IO) {
         val dao = shiftDao()
         if (dao.countShifts() == 0) {
             dao.insertShifts(defaultShifts())
         }
-        val matchedShift = dao.findActiveShiftByPin(pin)
-        if (matchedShift != null) {
-            dao.closeOpenSessions()
-            dao.insertSession(
-                ShiftSessionEntity(
-                    id = UUID.randomUUID().toString(),
-                    shiftId = matchedShift.id,
-                    openedAt = System.currentTimeMillis(),
-                    closedAt = null
-                )
-            )
-        }
-        matchedShift
+        val matchedShift = dao.findActiveShiftByPin(pin) ?: return@withContext null
+        dao.closeOpenSessions()
+        val session = ShiftSessionEntity(
+            id = UUID.randomUUID().toString(),
+            shiftId = matchedShift.id,
+            openedAt = System.currentTimeMillis(),
+            closedAt = null,
+            isSynced = false
+        )
+        dao.insertSession(session)
+        StartedShiftSession(shift = matchedShift, session = session)
+    }
+
+    suspend fun markSessionAsSynced(sessionId: String) = withContext(Dispatchers.IO) {
+        shiftDao().markSessionAsSynced(sessionId)
     }
 
     suspend fun lockActiveSessions() = withContext(Dispatchers.IO) {
@@ -119,4 +130,3 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 }
-

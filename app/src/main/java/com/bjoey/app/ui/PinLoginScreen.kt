@@ -34,9 +34,17 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.outlined.Backspace
 import androidx.compose.material.icons.outlined.PointOfSale
 import androidx.compose.material.icons.outlined.Restaurant
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.TableRestaurant
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -63,7 +71,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.bjoey.app.data.ShiftEntity
+import com.bjoey.app.data.StartedShiftSession
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -114,13 +122,16 @@ private val showcaseSlides = listOf(
 
 @Composable
 fun PinLoginScreen(
-    onValidatePin: suspend (String) -> ShiftEntity?,
-    onLoginSuccess: (ShiftEntity) -> Unit
+    baseUrl: String,
+    onSaveBaseUrl: (String) -> Unit,
+    onValidatePin: suspend (String) -> StartedShiftSession?,
+    onLoginSuccess: (StartedShiftSession) -> Unit
 ) {
     var pin by remember { mutableStateOf("") }
     var statusMessage by remember { mutableStateOf("") }
     var isErrorStatus by remember { mutableStateOf(false) }
     var isVerifying by remember { mutableStateOf(false) }
+    var showSettingsDialog by remember { mutableStateOf(false) }
 
     val shakeOffset = remember { Animatable(0f) }
     val coroutineScope = rememberCoroutineScope()
@@ -132,12 +143,12 @@ fun PinLoginScreen(
         statusMessage = "Verifying…"
 
         coroutineScope.launch {
-            val matchedShift = onValidatePin(enteredPin)
-            if (matchedShift != null) {
+            val startedSession = onValidatePin(enteredPin)
+            if (startedSession != null) {
                 isVerifying = false
                 pin = ""
                 statusMessage = ""
-                onLoginSuccess(matchedShift)
+                onLoginSuccess(startedSession)
             } else {
                 isErrorStatus = true
                 statusMessage = "Incorrect PIN, try again"
@@ -180,6 +191,19 @@ fun PinLoginScreen(
         statusMessage = "Cleared"
     }
 
+    if (showSettingsDialog) {
+        ServerUrlSettingsDialog(
+            currentUrl = baseUrl,
+            onDismiss = { showSettingsDialog = false },
+            onSave = { updatedUrl ->
+                onSaveBaseUrl(updatedUrl)
+                statusMessage = "Server URL disimpan"
+                isErrorStatus = false
+                showSettingsDialog = false
+            }
+        )
+    }
+
     Row(
         modifier = Modifier
             .fillMaxSize()
@@ -199,11 +223,68 @@ fun PinLoginScreen(
             statusMessage = statusMessage,
             isErrorStatus = isErrorStatus,
             shakeOffsetPx = shakeOffset.value,
+            onOpenSettingsDialog = { showSettingsDialog = true },
             onDigitClick = ::onDigitPressed,
             onClearClick = ::onClearPressed,
             onBackspaceClick = ::onBackspacePressed
         )
     }
+}
+
+@Composable
+fun ServerUrlSettingsDialog(
+    currentUrl: String,
+    onDismiss: () -> Unit,
+    onSave: (String) -> Unit
+) {
+    var urlInput by remember(currentUrl) { mutableStateOf(currentUrl) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Text(
+                text = "Pengaturan Server URL",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Gray900
+            )
+        },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(
+                    text = "Masukkan URL Cloudflare Tunnel server Next.js:",
+                    fontSize = 13.sp,
+                    color = Gray600
+                )
+                OutlinedTextField(
+                    value = urlInput,
+                    onValueChange = { urlInput = it },
+                    singleLine = true,
+                    label = { Text("Base URL Server") },
+                    placeholder = { Text("https://example.trycloudflare.com") },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = BrandRed,
+                        focusedLabelColor = BrandRed,
+                        cursorColor = BrandRed
+                    )
+                )
+            }
+        },
+        confirmButton = {
+            Button(
+                onClick = { onSave(urlInput) },
+                colors = ButtonDefaults.buttonColors(containerColor = BrandRed)
+            ) {
+                Text("Simpan", color = Color.White)
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Batal", color = Gray600)
+            }
+        }
+    )
 }
 
 @Composable
@@ -436,6 +517,7 @@ private fun RightKeypadSection(
     statusMessage: String,
     isErrorStatus: Boolean,
     shakeOffsetPx: Float,
+    onOpenSettingsDialog: () -> Unit,
     onDigitClick: (String) -> Unit,
     onClearClick: () -> Unit,
     onBackspaceClick: () -> Unit
@@ -452,6 +534,18 @@ private fun RightKeypadSection(
             horizontalArrangement = Arrangement.End,
             verticalAlignment = Alignment.CenterVertically
         ) {
+            IconButton(
+                onClick = onOpenSettingsDialog,
+                modifier = Modifier.size(36.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Settings,
+                    contentDescription = "Pengaturan Server URL",
+                    tint = Gray600,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+            Spacer(modifier = Modifier.width(6.dp))
             Box(
                 modifier = Modifier
                     .size(36.dp)
@@ -741,4 +835,3 @@ private fun TavolaBrandIcon(
         )
     }
 }
-

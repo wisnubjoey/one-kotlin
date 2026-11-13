@@ -1,8 +1,9 @@
-#Thu Nov 12 09:36:12 WITA 2026
+#Thu Nov 12 13:12:09 WITA 2026
 path.4=15/classes.dex
 path.3=classes2.dex
 path.2=4/classes.dex
 path.1=0/classes.dex
+path.6=1/classes.dex
 path.5=9/classes.dex
 path.0=classes.dex
 base.4=/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/build/intermediates/dex/debug/mergeProjectDexDebug/15/classes.dex
@@ -14,6 +15,8 @@ renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
+renamed.6=classes7.dex
 renamed.5=classes6.dex
+base.6=/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/build/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
 renamed.4=classes5.dex
 base.5=/Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/build/intermediates/dex/debug/mergeProjectDexDebug/9/classes.dex

@@ -20,8 +20,10 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.bjoey.app.data.AppDatabase
-import com.bjoey.app.data.ShiftEntity
-import com.bjoey.app.ui.HomeScreen
+import com.bjoey.app.data.ServerConfigManager
+import com.bjoey.app.data.StartedShiftSession
+import com.bjoey.app.network.ShiftSyncManager
+import com.bjoey.app.ui.DashboardScreen
 import com.bjoey.app.ui.PinLoginScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,6 +34,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val database = AppDatabase.getInstance(applicationContext)
+        val serverConfigManager = ServerConfigManager(applicationContext)
+        val shiftSyncManager = ShiftSyncManager(
+            serverConfigManager = serverConfigManager,
+            database = database
+        )
 
         setContent {
             MaterialTheme {
@@ -39,7 +46,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var activeShift by remember { mutableStateOf<ShiftEntity?>(null) }
+                    var activeSession by remember { mutableStateOf<StartedShiftSession?>(null) }
+                    var baseUrl by remember { mutableStateOf(serverConfigManager.getBaseUrl()) }
                     var lockSessionCounter by remember { mutableIntStateOf(0) }
                     val coroutineScope = rememberCoroutineScope()
                     val lifecycleOwner = LocalLifecycleOwner.current
@@ -53,7 +61,7 @@ class MainActivity : ComponentActivity() {
                     DisposableEffect(lifecycleOwner) {
                         val observer = LifecycleEventObserver { _, event ->
                             if (event == Lifecycle.Event.ON_STOP) {
-                                activeShift = null
+                                activeSession = null
                                 lockSessionCounter++
                                 coroutineScope.launch {
                                     database.lockActiveSessions()
@@ -66,23 +74,34 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    val currentShift = activeShift
-                    if (currentShift == null) {
+                    val currentSession = activeSession
+                    if (currentSession == null) {
                         key(lockSessionCounter) {
                             PinLoginScreen(
+                                baseUrl = baseUrl,
+                                onSaveBaseUrl = { updatedUrl ->
+                                    serverConfigManager.setBaseUrl(updatedUrl)
+                                    baseUrl = serverConfigManager.getBaseUrl()
+                                },
                                 onValidatePin = { enteredPin ->
                                     database.verifyPinAndStartSession(enteredPin)
                                 },
-                                onLoginSuccess = { matchedShift ->
-                                    activeShift = matchedShift
+                                onLoginSuccess = { startedSession ->
+                                    activeSession = startedSession
                                 }
                             )
                         }
                     } else {
-                        HomeScreen(
-                            shiftName = currentShift.name,
+                        DashboardScreen(
+                            session = currentSession,
+                            baseUrl = baseUrl,
+                            shiftSyncManager = shiftSyncManager,
+                            onSaveBaseUrl = { updatedUrl ->
+                                serverConfigManager.setBaseUrl(updatedUrl)
+                                baseUrl = serverConfigManager.getBaseUrl()
+                            },
                             onLockClick = {
-                                activeShift = null
+                                activeSession = null
                                 lockSessionCounter++
                                 coroutineScope.launch {
                                     database.lockActiveSessions()
