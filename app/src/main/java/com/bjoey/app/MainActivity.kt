@@ -23,11 +23,18 @@ import com.bjoey.app.data.AppDatabase
 import com.bjoey.app.data.ServerConfigManager
 import com.bjoey.app.data.StartedShiftSession
 import com.bjoey.app.network.ShiftSyncManager
+import com.bjoey.app.network.SyncResult
 import com.bjoey.app.ui.DashboardScreen
+import com.bjoey.app.ui.HeartbeatMonitorScreen
 import com.bjoey.app.ui.PinLoginScreen
+import com.bjoey.app.ui.SyncLogItem
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,22 +99,105 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                     } else {
-                        DashboardScreen(
-                            session = currentSession,
-                            baseUrl = baseUrl,
-                            shiftSyncManager = shiftSyncManager,
-                            onSaveBaseUrl = { updatedUrl ->
-                                serverConfigManager.setBaseUrl(updatedUrl)
-                                baseUrl = serverConfigManager.getBaseUrl()
-                            },
-                            onLockClick = {
+                        key(currentSession.session.id) {
+                            var showMonitorScreen by remember { mutableStateOf(false) }
+                            var isOnline by remember { mutableStateOf<Boolean?>(null) }
+                            var lastSyncTime by remember { mutableStateOf("-") }
+                            var countdown by remember { mutableIntStateOf(10) }
+                            // Auto-sync heartbeat is PAUSED by default
+                            var isPaused by remember { mutableStateOf(true) }
+                            var isSyncing by remember { mutableStateOf(false) }
+                            var logHistory by remember { mutableStateOf<List<SyncLogItem>>(emptyList()) }
+
+                            fun performSync() {
+                                if (isSyncing) return
+                                isSyncing = true
+                                coroutineScope.launch {
+                                    val result: SyncResult = shiftSyncManager.syncShiftSession(currentSession)
+                                    val currentClock = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+
+                                    isOnline = result.isSuccess
+                                    if (result.isSuccess) {
+                                        lastSyncTime = currentClock
+                                    }
+
+                                    val newLog = SyncLogItem(
+                                        timestamp = currentClock,
+                                        isSuccess = result.isSuccess,
+                                        summary = result.summary,
+                                        detail = result.logMessage
+                                    )
+                                    logHistory = (listOf(newLog) + logHistory).take(10)
+                                    isSyncing = false
+                                }
+                            }
+
+                            LaunchedEffect(currentSession.session.id) {
+                                if (!isPaused) {
+                                    performSync()
+                                }
+                            }
+
+                            LaunchedEffect(currentSession.session.id, isPaused) {
+                                if (isPaused) return@LaunchedEffect
+                                while (true) {
+                                    delay(1000L)
+                                    if (countdown > 1) {
+                                        countdown--
+                                    } else {
+                                        countdown = 10
+                                        performSync()
+                                    }
+                                }
+                            }
+
+                            val handleLockClick = {
                                 activeSession = null
                                 lockSessionCounter++
                                 coroutineScope.launch {
                                     database.lockActiveSessions()
                                 }
+                                Unit
                             }
-                        )
+
+                            if (showMonitorScreen) {
+                                HeartbeatMonitorScreen(
+                                    session = currentSession,
+                                    baseUrl = baseUrl,
+                                    isOnline = isOnline,
+                                    lastSyncTime = lastSyncTime,
+                                    countdown = countdown,
+                                    isPaused = isPaused,
+                                    isSyncing = isSyncing,
+                                    logHistory = logHistory,
+                                    onTogglePause = { checked ->
+                                        isPaused = checked
+                                        if (!checked) {
+                                            countdown = 10
+                                            performSync()
+                                        }
+                                    },
+                                    onManualSync = {
+                                        countdown = 10
+                                        performSync()
+                                    },
+                                    onSaveBaseUrl = { updatedUrl ->
+                                        serverConfigManager.setBaseUrl(updatedUrl)
+                                        baseUrl = serverConfigManager.getBaseUrl()
+                                    },
+                                    onBackClick = { showMonitorScreen = false },
+                                    onLockClick = handleLockClick
+                                )
+                            } else {
+                                DashboardScreen(
+                                    session = currentSession,
+                                    isOnline = isOnline,
+                                    isPaused = isPaused,
+                                    onOpenMonitorClick = { showMonitorScreen = true },
+                                    onLockClick = handleLockClick
+                                )
+                            }
+                        }
                     }
                 }
             }
