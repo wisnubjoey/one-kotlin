@@ -28,6 +28,7 @@ import com.bjoey.app.ui.DashboardScreen
 import com.bjoey.app.ui.HeartbeatMonitorScreen
 import com.bjoey.app.ui.PinLoginScreen
 import com.bjoey.app.ui.SyncLogItem
+import com.bjoey.app.ui.settings.SettingsScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -101,6 +102,7 @@ class MainActivity : ComponentActivity() {
                     } else {
                         key(currentSession.session.id) {
                             var showMonitorScreen by remember { mutableStateOf(false) }
+                            var showSettingsScreen by remember { mutableStateOf(false) }
                             var isOnline by remember { mutableStateOf<Boolean?>(null) }
                             var lastSyncTime by remember { mutableStateOf("-") }
                             var countdown by remember { mutableIntStateOf(10) }
@@ -160,42 +162,51 @@ class MainActivity : ComponentActivity() {
                                 Unit
                             }
 
-                            if (showMonitorScreen) {
-                                HeartbeatMonitorScreen(
-                                    session = currentSession,
-                                    baseUrl = baseUrl,
-                                    isOnline = isOnline,
-                                    lastSyncTime = lastSyncTime,
-                                    countdown = countdown,
-                                    isPaused = isPaused,
-                                    isSyncing = isSyncing,
-                                    logHistory = logHistory,
-                                    onTogglePause = { checked ->
-                                        isPaused = checked
-                                        if (!checked) {
+                            when {
+                                showSettingsScreen -> {
+                                    SettingsScreen(
+                                        onBackClick = { showSettingsScreen = false }
+                                    )
+                                }
+                                showMonitorScreen -> {
+                                    HeartbeatMonitorScreen(
+                                        session = currentSession,
+                                        baseUrl = baseUrl,
+                                        isOnline = isOnline,
+                                        lastSyncTime = lastSyncTime,
+                                        countdown = countdown,
+                                        isPaused = isPaused,
+                                        isSyncing = isSyncing,
+                                        logHistory = logHistory,
+                                        onTogglePause = { checked ->
+                                            isPaused = checked
+                                            if (!checked) {
+                                                countdown = 10
+                                                performSync()
+                                            }
+                                        },
+                                        onManualSync = {
                                             countdown = 10
                                             performSync()
-                                        }
-                                    },
-                                    onManualSync = {
-                                        countdown = 10
-                                        performSync()
-                                    },
-                                    onSaveBaseUrl = { updatedUrl ->
-                                        serverConfigManager.setBaseUrl(updatedUrl)
-                                        baseUrl = serverConfigManager.getBaseUrl()
-                                    },
-                                    onBackClick = { showMonitorScreen = false },
-                                    onLockClick = handleLockClick
-                                )
-                            } else {
-                                DashboardScreen(
-                                    session = currentSession,
-                                    isOnline = isOnline,
-                                    isPaused = isPaused,
-                                    onOpenMonitorClick = { showMonitorScreen = true },
-                                    onLockClick = handleLockClick
-                                )
+                                        },
+                                        onSaveBaseUrl = { updatedUrl ->
+                                            serverConfigManager.setBaseUrl(updatedUrl)
+                                            baseUrl = serverConfigManager.getBaseUrl()
+                                        },
+                                        onBackClick = { showMonitorScreen = false },
+                                        onLockClick = handleLockClick
+                                    )
+                                }
+                                else -> {
+                                    DashboardScreen(
+                                        session = currentSession,
+                                        isOnline = isOnline,
+                                        isPaused = isPaused,
+                                        onOpenMonitorClick = { showMonitorScreen = true },
+                                        onOpenSettingsClick = { showSettingsScreen = true },
+                                        onLockClick = handleLockClick
+                                    )
+                                }
                             }
                         }
                     }
