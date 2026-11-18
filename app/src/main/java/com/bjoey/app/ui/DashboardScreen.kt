@@ -37,6 +37,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.DeleteOutline
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -126,7 +127,8 @@ fun DashboardScreen(
     isOnline: Boolean?,
     isPaused: Boolean,
     onOpenMonitorClick: () -> Unit,
-    onLockClick: () -> Unit
+    onLockClick: () -> Unit,
+    onOpenSettingsClick: () -> Unit = {}
 ) {
     var activeCategory by remember { mutableStateOf("All") }
     var searchQuery by remember { mutableStateOf("") }
@@ -217,43 +219,21 @@ fun DashboardScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(14.dp)
             ) {
-                // Brand Title
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                // Settings Button
+                IconButton(
+                    onClick = onOpenSettingsClick,
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Color.White)
+                        .border(1.dp, KasaLine, RoundedCornerShape(8.dp))
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .size(40.dp)
-                            .clip(RoundedCornerShape(8.dp))
-                            .background(KasaInk),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "K/",
-                            color = Color.White,
-                            fontWeight = FontWeight.ExtraBold,
-                            fontSize = 18.sp,
-                            letterSpacing = (-0.5).sp
-                        )
-                    }
-                    Column {
-                        Text(
-                            text = "KASA POS",
-                            fontSize = 19.sp,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = KasaInk,
-                            letterSpacing = (-0.5).sp,
-                            lineHeight = 20.sp
-                        )
-                        Text(
-                            text = "TERMINAL 01",
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = KasaMuted,
-                            letterSpacing = 0.6.sp
-                        )
-                    }
+                    Icon(
+                        imageVector = Icons.Outlined.Settings,
+                        contentDescription = "Settings",
+                        tint = KasaInk,
+                        modifier = Modifier.size(20.dp)
+                    )
                 }
 
                 // Live Search Input

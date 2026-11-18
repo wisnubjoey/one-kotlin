@@ -42,6 +42,8 @@ MERGED from [androidx.lifecycle:lifecycle-runtime-compose:2.7.0] /Users/Bjoey/.g
 MERGED from [androidx.compose.ui:ui-android:1.6.1] /Users/Bjoey/.gradle/caches/transforms-4/d54a86b004d8ca7dd26b78a44291d4a2/transformed/jetified-ui-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.activity:activity-ktx:1.8.2] /Users/Bjoey/.gradle/caches/transforms-4/a707be9fa397af0a6a80995add933157/transformed/jetified-activity-ktx-1.8.2/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.activity:activity-compose:1.8.2] /Users/Bjoey/.gradle/caches/transforms-4/8b76e2800a949e966ee49beaaec977f9/transformed/jetified-activity-compose-1.8.2/AndroidManifest.xml:2:1-7:12
+MERGED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/a1931f66b83f53fa80dcc8e04c2a827d/transformed/jetified-debug-db-1.0.7/AndroidManifest.xml:2:1-17:12
+MERGED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db-base:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/d785215bc8fd0e16fe1c442870242c4b/transformed/jetified-debug-db-base-1.0.7/AndroidManifest.xml:20:1-30:12
 MERGED from [androidx.room:room-runtime:2.6.1] /Users/Bjoey/.gradle/caches/transforms-4/ccaf83614be97eff5f6799ed08b77aff/transformed/room-runtime-2.6.1/AndroidManifest.xml:17:1-31:12
 MERGED from [androidx.room:room-ktx:2.6.1] /Users/Bjoey/.gradle/caches/transforms-4/3faec975eebbe044f86d90f589121165/transformed/jetified-room-ktx-2.6.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/Bjoey/.gradle/caches/transforms-4/e91abfaeeb422200e69b9f6c15c0615c/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:17:1-22:12
@@ -65,6 +67,8 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/Bjoey/.gradle/cach
 		ADDED from /Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
 ADDED from /Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:3:5-67
+MERGED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db-base:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/d785215bc8fd0e16fe1c442870242c4b/transformed/jetified-debug-db-base-1.0.7/AndroidManifest.xml:27:5-67
+MERGED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db-base:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/d785215bc8fd0e16fe1c442870242c4b/transformed/jetified-debug-db-base-1.0.7/AndroidManifest.xml:27:5-67
 	android:name
 		ADDED from /Users/Bjoey/Desktop/Dev/Working/KotlinDev/panda-cash-drawer-1/app/src/main/AndroidManifest.xml:3:22-64
 application
@@ -76,6 +80,8 @@ MERGED from [androidx.core:core:1.12.0] /Users/Bjoey/.gradle/caches/transforms-4
 MERGED from [androidx.core:core:1.12.0] /Users/Bjoey/.gradle/caches/transforms-4/ea3df0294d03aef598c6eca03c452a36/transformed/core-1.12.0/AndroidManifest.xml:28:5-89
 MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/Bjoey/.gradle/caches/transforms-4/9eeddb8b65d77d757abbcd628717a2d1/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/Bjoey/.gradle/caches/transforms-4/9eeddb8b65d77d757abbcd628717a2d1/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:23:5-33:19
+MERGED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/a1931f66b83f53fa80dcc8e04c2a827d/transformed/jetified-debug-db-1.0.7/AndroidManifest.xml:9:5-15:19
+MERGED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/a1931f66b83f53fa80dcc8e04c2a827d/transformed/jetified-debug-db-1.0.7/AndroidManifest.xml:9:5-15:19
 MERGED from [androidx.room:room-runtime:2.6.1] /Users/Bjoey/.gradle/caches/transforms-4/ccaf83614be97eff5f6799ed08b77aff/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
 MERGED from [androidx.room:room-runtime:2.6.1] /Users/Bjoey/.gradle/caches/transforms-4/ccaf83614be97eff5f6799ed08b77aff/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/Bjoey/.gradle/caches/transforms-4/f42d38a5b2b097ab9f021f493af95023/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
@@ -192,6 +198,10 @@ MERGED from [androidx.activity:activity-ktx:1.8.2] /Users/Bjoey/.gradle/caches/t
 MERGED from [androidx.activity:activity-ktx:1.8.2] /Users/Bjoey/.gradle/caches/transforms-4/a707be9fa397af0a6a80995add933157/transformed/jetified-activity-ktx-1.8.2/AndroidManifest.xml:5:5-44
 MERGED from [androidx.activity:activity-compose:1.8.2] /Users/Bjoey/.gradle/caches/transforms-4/8b76e2800a949e966ee49beaaec977f9/transformed/jetified-activity-compose-1.8.2/AndroidManifest.xml:5:5-44
 MERGED from [androidx.activity:activity-compose:1.8.2] /Users/Bjoey/.gradle/caches/transforms-4/8b76e2800a949e966ee49beaaec977f9/transformed/jetified-activity-compose-1.8.2/AndroidManifest.xml:5:5-44
+MERGED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/a1931f66b83f53fa80dcc8e04c2a827d/transformed/jetified-debug-db-1.0.7/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/a1931f66b83f53fa80dcc8e04c2a827d/transformed/jetified-debug-db-1.0.7/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db-base:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/d785215bc8fd0e16fe1c442870242c4b/transformed/jetified-debug-db-base-1.0.7/AndroidManifest.xml:23:5-25:41
+MERGED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db-base:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/d785215bc8fd0e16fe1c442870242c4b/transformed/jetified-debug-db-base-1.0.7/AndroidManifest.xml:23:5-25:41
 MERGED from [androidx.room:room-runtime:2.6.1] /Users/Bjoey/.gradle/caches/transforms-4/ccaf83614be97eff5f6799ed08b77aff/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
 MERGED from [androidx.room:room-runtime:2.6.1] /Users/Bjoey/.gradle/caches/transforms-4/ccaf83614be97eff5f6799ed08b77aff/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
 MERGED from [androidx.room:room-ktx:2.6.1] /Users/Bjoey/.gradle/caches/transforms-4/3faec975eebbe044f86d90f589121165/transformed/jetified-room-ktx-2.6.1/AndroidManifest.xml:20:5-44
@@ -270,6 +280,20 @@ ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/Bjoey/.gradle/cac
 		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/Bjoey/.gradle/caches/transforms-4/9eeddb8b65d77d757abbcd628717a2d1/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
 	android:name
 		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/Bjoey/.gradle/caches/transforms-4/9eeddb8b65d77d757abbcd628717a2d1/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
+provider#com.amitshekhar.debug.DebugDBInitProvider
+ADDED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/a1931f66b83f53fa80dcc8e04c2a827d/transformed/jetified-debug-db-1.0.7/AndroidManifest.xml:10:9-14:40
+	android:enabled
+		ADDED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/a1931f66b83f53fa80dcc8e04c2a827d/transformed/jetified-debug-db-1.0.7/AndroidManifest.xml:13:13-35
+	android:authorities
+		ADDED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/a1931f66b83f53fa80dcc8e04c2a827d/transformed/jetified-debug-db-1.0.7/AndroidManifest.xml:12:13-71
+	android:exported
+		ADDED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/a1931f66b83f53fa80dcc8e04c2a827d/transformed/jetified-debug-db-1.0.7/AndroidManifest.xml:14:13-37
+	android:name
+		ADDED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/a1931f66b83f53fa80dcc8e04c2a827d/transformed/jetified-debug-db-1.0.7/AndroidManifest.xml:11:13-69
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db-base:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/d785215bc8fd0e16fe1c442870242c4b/transformed/jetified-debug-db-base-1.0.7/AndroidManifest.xml:28:5-76
+	android:name
+		ADDED from [com.github.amitshekhariitbhu.Android-Debug-Database:debug-db-base:1.0.7] /Users/Bjoey/.gradle/caches/transforms-4/d785215bc8fd0e16fe1c442870242c4b/transformed/jetified-debug-db-base-1.0.7/AndroidManifest.xml:28:22-73
 service#androidx.room.MultiInstanceInvalidationService
 ADDED from [androidx.room:room-runtime:2.6.1] /Users/Bjoey/.gradle/caches/transforms-4/ccaf83614be97eff5f6799ed08b77aff/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
 	android:exported
