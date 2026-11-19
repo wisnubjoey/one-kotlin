@@ -36,6 +36,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.DeleteOutline
 import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.outlined.RestaurantMenu
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.ShoppingCart
@@ -128,7 +129,8 @@ fun DashboardScreen(
     isPaused: Boolean,
     onOpenMonitorClick: () -> Unit,
     onLockClick: () -> Unit,
-    onOpenSettingsClick: () -> Unit = {}
+    onOpenSettingsClick: () -> Unit = {},
+    onOpenMenuClick: () -> Unit = {}
 ) {
     var activeCategory by remember { mutableStateOf("All") }
     var searchQuery by remember { mutableStateOf("") }
@@ -231,6 +233,23 @@ fun DashboardScreen(
                     Icon(
                         imageVector = Icons.Outlined.Settings,
                         contentDescription = "Settings",
+                        tint = KasaInk,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
+
+                // Menu Management Button
+                IconButton(
+                    onClick = onOpenMenuClick,
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Color.White)
+                        .border(1.dp, KasaLine, RoundedCornerShape(8.dp))
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.RestaurantMenu,
+                        contentDescription = "Menu Management",
                         tint = KasaInk,
                         modifier = Modifier.size(20.dp)
                     )

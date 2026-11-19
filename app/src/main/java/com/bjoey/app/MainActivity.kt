@@ -29,6 +29,7 @@ import com.bjoey.app.ui.HeartbeatMonitorScreen
 import com.bjoey.app.ui.PinLoginScreen
 import com.bjoey.app.ui.SyncLogItem
 import com.bjoey.app.ui.settings.SettingsScreen
+import com.bjoey.app.ui.settings.menu.MenuNavigation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -103,6 +104,7 @@ class MainActivity : ComponentActivity() {
                         key(currentSession.session.id) {
                             var showMonitorScreen by remember { mutableStateOf(false) }
                             var showSettingsScreen by remember { mutableStateOf(false) }
+                            var showMenuScreen by remember { mutableStateOf(false) }
                             var isOnline by remember { mutableStateOf<Boolean?>(null) }
                             var lastSyncTime by remember { mutableStateOf("-") }
                             var countdown by remember { mutableIntStateOf(10) }
@@ -163,9 +165,16 @@ class MainActivity : ComponentActivity() {
                             }
 
                             when {
+                                showMenuScreen -> {
+                                    MenuNavigation(
+                                        menuDao = database.menuDao(),
+                                        onBackClick = { showMenuScreen = false }
+                                    )
+                                }
                                 showSettingsScreen -> {
                                     SettingsScreen(
-                                        onBackClick = { showSettingsScreen = false }
+                                        onBackClick = { showSettingsScreen = false },
+                                        onMenuClick = { showMenuScreen = true }
                                     )
                                 }
                                 showMonitorScreen -> {
@@ -204,6 +213,7 @@ class MainActivity : ComponentActivity() {
                                         isPaused = isPaused,
                                         onOpenMonitorClick = { showMonitorScreen = true },
                                         onOpenSettingsClick = { showSettingsScreen = true },
+                                        onOpenMenuClick = { showMenuScreen = true },
                                         onLockClick = handleLockClick
                                     )
                                 }
