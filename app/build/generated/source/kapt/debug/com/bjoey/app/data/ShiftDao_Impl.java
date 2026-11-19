@@ -112,7 +112,7 @@ public final class ShiftDao_Impl implements ShiftDao {
 
   @Override
   public Object insertShifts(final List<ShiftEntity> shifts,
-      final Continuation<? super Unit> $completion) {
+      final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -126,12 +126,12 @@ public final class ShiftDao_Impl implements ShiftDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
   public Object insertSession(final ShiftSessionEntity session,
-      final Continuation<? super Unit> $completion) {
+      final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -145,12 +145,11 @@ public final class ShiftDao_Impl implements ShiftDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object markSessionAsSynced(final String sessionId,
-      final Continuation<? super Unit> $completion) {
+  public Object markSessionAsSynced(final String sessionId, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -175,12 +174,11 @@ public final class ShiftDao_Impl implements ShiftDao {
           __preparedStmtOfMarkSessionAsSynced.release(_stmt);
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object closeOpenSessions(final long closedAt,
-      final Continuation<? super Unit> $completion) {
+  public Object closeOpenSessions(final long closedAt, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -201,11 +199,11 @@ public final class ShiftDao_Impl implements ShiftDao {
           __preparedStmtOfCloseOpenSessions.release(_stmt);
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object countShifts(final Continuation<? super Integer> $completion) {
+  public Object countShifts(final Continuation<? super Integer> arg0) {
     final String _sql = "SELECT COUNT(*) FROM shifts";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
@@ -233,12 +231,12 @@ public final class ShiftDao_Impl implements ShiftDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg0);
   }
 
   @Override
   public Object findActiveShiftByPin(final String pin,
-      final Continuation<? super ShiftEntity> $completion) {
+      final Continuation<? super ShiftEntity> arg1) {
     final String _sql = "SELECT * FROM shifts WHERE pin = ? AND isActive = 1 LIMIT 1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -288,7 +286,7 @@ public final class ShiftDao_Impl implements ShiftDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @NonNull
