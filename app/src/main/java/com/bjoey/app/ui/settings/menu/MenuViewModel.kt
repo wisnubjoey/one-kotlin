@@ -3,9 +3,9 @@ package com.bjoey.app.ui.settings.menu
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.bjoey.app.data.MenuCategoryEntity
-import com.bjoey.app.data.MenuDao
-import com.bjoey.app.data.MenuItemEntity
+import com.bjoey.app.data.local.dao.MenuDao
+import com.bjoey.app.data.local.entity.MenuCategoryEntity
+import com.bjoey.app.data.local.entity.MenuItemEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,9 +1,9 @@
 package com.bjoey.app.network
 
 import android.util.Log
-import com.bjoey.app.data.AppDatabase
 import com.bjoey.app.data.ServerConfigManager
-import com.bjoey.app.data.StartedShiftSession
+import com.bjoey.app.data.local.AppDatabase
+import com.bjoey.app.data.local.entity.StartedShiftSession
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
