@@ -22,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.RestaurantMenu
+import androidx.compose.material.icons.outlined.TableRestaurant
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -41,7 +42,8 @@ fun SettingsScreen(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
     onMenuClick: () -> Unit = {},
-    onHistoryClick: () -> Unit = {}
+    onHistoryClick: () -> Unit = {},
+    onTableClick: () -> Unit = {}
 ) {
     BackHandler(onBack = onBackClick)
 
@@ -113,7 +115,13 @@ fun SettingsScreen(
                     onClick = onHistoryClick,
                     modifier = Modifier.weight(1f)
                 )
-                BlankSettingsCard(modifier = Modifier.weight(1f))
+                SettingsCardButton(
+                    title = "Table",
+                    subtitle = "Kelola daftar meja",
+                    icon = Icons.Outlined.TableRestaurant,
+                    onClick = onTableClick,
+                    modifier = Modifier.weight(1f)
+                )
                 BlankSettingsCard(modifier = Modifier.weight(1f))
             }
         }

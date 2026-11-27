@@ -19,9 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import com.bjoey.app.data.AppDatabase
 import com.bjoey.app.data.ServerConfigManager
-import com.bjoey.app.data.StartedShiftSession
+import com.bjoey.app.data.local.AppDatabase
+import com.bjoey.app.data.local.entity.StartedShiftSession
 import com.bjoey.app.network.ShiftSyncManager
 import com.bjoey.app.network.SyncResult
 import com.bjoey.app.ui.DashboardScreen
@@ -30,6 +30,7 @@ import com.bjoey.app.ui.PinLoginScreen
 import com.bjoey.app.ui.SyncLogItem
 import com.bjoey.app.ui.settings.SettingsScreen
 import com.bjoey.app.ui.settings.menu.MenuNavigation
+import com.bjoey.app.ui.settings.table.TableNavigation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -105,6 +106,7 @@ class MainActivity : ComponentActivity() {
                             var showMonitorScreen by remember { mutableStateOf(false) }
                             var showSettingsScreen by remember { mutableStateOf(false) }
                             var showMenuScreen by remember { mutableStateOf(false) }
+                            var showTableScreen by remember { mutableStateOf(false) }
                             var isOnline by remember { mutableStateOf<Boolean?>(null) }
                             var lastSyncTime by remember { mutableStateOf("-") }
                             var countdown by remember { mutableIntStateOf(10) }
@@ -171,10 +173,17 @@ class MainActivity : ComponentActivity() {
                                         onBackClick = { showMenuScreen = false }
                                     )
                                 }
+                                showTableScreen -> {
+                                    TableNavigation(
+                                        tableDao = database.tableDao(),
+                                        onBackClick = { showTableScreen = false }
+                                    )
+                                }
                                 showSettingsScreen -> {
                                     SettingsScreen(
                                         onBackClick = { showSettingsScreen = false },
-                                        onMenuClick = { showMenuScreen = true }
+                                        onMenuClick = { showMenuScreen = true },
+                                        onTableClick = { showTableScreen = true }
                                     )
                                 }
                                 showMonitorScreen -> {

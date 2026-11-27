@@ -1,10 +1,10 @@
 package com.bjoey.app.ui.settings.menu
 
-import com.bjoey.app.data.AppDatabase
-import com.bjoey.app.data.MenuCategoryEntity
-import com.bjoey.app.data.MenuDao
-import com.bjoey.app.data.MenuItemEntity
-import com.bjoey.app.data.MenuItemWithCategory
+import com.bjoey.app.data.local.DatabaseSeeds
+import com.bjoey.app.data.local.dao.MenuDao
+import com.bjoey.app.data.local.entity.MenuCategoryEntity
+import com.bjoey.app.data.local.entity.MenuItemEntity
+import com.bjoey.app.data.local.entity.MenuItemWithCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -40,8 +40,8 @@ class MenuViewModelTest {
     @Test
     fun initialState_loadsSeededCategoriesAndItems() = runTest {
         val fakeDao = FakeMenuDao(
-            initialCategories = AppDatabase.defaultMenuCategories(),
-            initialItems = AppDatabase.defaultMenuItems()
+            initialCategories = DatabaseSeeds.defaultMenuCategories(),
+            initialItems = DatabaseSeeds.defaultMenuItems()
         )
         val viewModel = MenuViewModel(fakeDao, testDispatcher)
         val itemsJob = backgroundScope.launch(testDispatcher) { viewModel.menuItems.collect {} }
@@ -57,8 +57,8 @@ class MenuViewModelTest {
     @Test
     fun categoryAndSearchFilters_filterMenuItems() = runTest {
         val fakeDao = FakeMenuDao(
-            initialCategories = AppDatabase.defaultMenuCategories(),
-            initialItems = AppDatabase.defaultMenuItems()
+            initialCategories = DatabaseSeeds.defaultMenuCategories(),
+            initialItems = DatabaseSeeds.defaultMenuItems()
         )
         val viewModel = MenuViewModel(fakeDao, testDispatcher)
         val filteredJob = backgroundScope.launch(testDispatcher) { viewModel.filteredMenuItems.collect {} }
@@ -91,8 +91,8 @@ class MenuViewModelTest {
     @Test
     fun addCategoryAndMenuCrud_updatesRoomDaoState() = runTest {
         val fakeDao = FakeMenuDao(
-            initialCategories = AppDatabase.defaultMenuCategories(),
-            initialItems = AppDatabase.defaultMenuItems()
+            initialCategories = DatabaseSeeds.defaultMenuCategories(),
+            initialItems = DatabaseSeeds.defaultMenuItems()
         )
         val viewModel = MenuViewModel(fakeDao, testDispatcher)
         val itemsJob = backgroundScope.launch(testDispatcher) { viewModel.menuItems.collect {} }

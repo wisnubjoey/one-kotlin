@@ -68,7 +68,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.bjoey.app.data.StartedShiftSession
+import com.bjoey.app.data.local.entity.StartedShiftSession
 import java.text.NumberFormat
 import java.util.Locale
 import kotlin.math.roundToInt

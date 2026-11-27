@@ -10,7 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.bjoey.app.data.MenuDao
+import com.bjoey.app.data.local.dao.MenuDao
 
 private const val MENU_LIST_ROUTE = "menu_list"
 private const val MENU_FORM_BASE_ROUTE = "menu_form"

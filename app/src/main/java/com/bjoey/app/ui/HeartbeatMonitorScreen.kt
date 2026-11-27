@@ -66,7 +66,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.bjoey.app.data.StartedShiftSession
+import com.bjoey.app.data.local.entity.StartedShiftSession
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.UUID
