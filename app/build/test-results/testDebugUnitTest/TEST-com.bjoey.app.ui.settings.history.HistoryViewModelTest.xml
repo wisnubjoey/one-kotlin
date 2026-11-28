@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.bjoey.app.ui.settings.history.HistoryViewModelTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-28T06:10:01" hostname="Bjoey-Mac.local" time="0.021">
+  <properties/>
+  <testcase name="filtersAndSearch_filterByStatusOrderNumTableMenuAndPayment" classname="com.bjoey.app.ui.settings.history.HistoryViewModelTest" time="0.012"/>
+  <testcase name="getOrderById_returnsMatchingEntryOrNull" classname="com.bjoey.app.ui.settings.history.HistoryViewModelTest" time="0.003"/>
+  <testcase name="summary_calculatesCountsAndPaidRevenueOnly" classname="com.bjoey.app.ui.settings.history.HistoryViewModelTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

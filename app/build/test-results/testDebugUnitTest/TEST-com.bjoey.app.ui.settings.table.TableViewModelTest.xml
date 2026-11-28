@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bjoey.app.ui.settings.table.TableViewModelTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-26T06:51:43" hostname="Bjoey-Mac.local" time="0.013">
+<testsuite name="com.bjoey.app.ui.settings.table.TableViewModelTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-28T06:10:01" hostname="Bjoey-Mac.local" time="0.014">
   <properties/>
   <testcase name="tableCrud_updatesRoomDaoState" classname="com.bjoey.app.ui.settings.table.TableViewModelTest" time="0.005"/>
-  <testcase name="initialState_loadsSeededTables" classname="com.bjoey.app.ui.settings.table.TableViewModelTest" time="0.003"/>
+  <testcase name="initialState_loadsSeededTables" classname="com.bjoey.app.ui.settings.table.TableViewModelTest" time="0.002"/>
   <testcase name="searchFilter_filtersTablesByName" classname="com.bjoey.app.ui.settings.table.TableViewModelTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

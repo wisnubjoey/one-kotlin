@@ -6,8 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.bjoey.app.data.local.dao.MenuDao
+import com.bjoey.app.data.local.dao.OrderDao
 import com.bjoey.app.data.local.dao.ShiftDao
 import com.bjoey.app.data.local.dao.TableDao
+import com.bjoey.app.data.local.entity.DiningOrderEntity
+import com.bjoey.app.data.local.entity.DiningOrderItemEntity
 import com.bjoey.app.data.local.entity.DiningTableEntity
 import com.bjoey.app.data.local.entity.MenuCategoryEntity
 import com.bjoey.app.data.local.entity.MenuItemEntity
@@ -27,9 +30,11 @@ import java.util.UUID
         ShiftSessionEntity::class,
         MenuCategoryEntity::class,
         MenuItemEntity::class,
-        DiningTableEntity::class
+        DiningTableEntity::class,
+        DiningOrderEntity::class,
+        DiningOrderItemEntity::class
     ],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -37,6 +42,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun shiftDao(): ShiftDao
     abstract fun menuDao(): MenuDao
     abstract fun tableDao(): TableDao
+    abstract fun orderDao(): OrderDao
 
     suspend fun verifyPinAndStartSession(pin: String): StartedShiftSession? = withContext(Dispatchers.IO) {
         val dao = shiftDao()

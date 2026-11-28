@@ -73,8 +73,61 @@ object DatabaseMigrations {
         }
     }
 
+    val MIGRATION_4_5 = object : Migration(4, 5) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `dining_orders` (
+                    `id` TEXT NOT NULL,
+                    `orderNumber` INTEGER NOT NULL,
+                    `tableId` TEXT NOT NULL,
+                    `tableName` TEXT NOT NULL,
+                    `guestCount` INTEGER NOT NULL,
+                    `shiftSessionId` TEXT NOT NULL,
+                    `status` TEXT NOT NULL,
+                    `paymentMethod` TEXT,
+                    `subtotal` INTEGER NOT NULL,
+                    `taxAmount` INTEGER NOT NULL,
+                    `grandTotal` INTEGER NOT NULL,
+                    `cashReceived` INTEGER,
+                    `changeAmount` INTEGER,
+                    `createdAt` INTEGER NOT NULL,
+                    `updatedAt` INTEGER NOT NULL,
+                    `closedAt` INTEGER,
+                    PRIMARY KEY(`id`)
+                )
+                """.trimIndent()
+            )
+            db.execSQL(
+                "CREATE INDEX IF NOT EXISTS `index_dining_orders_tableId` ON `dining_orders` (`tableId`)"
+            )
+            db.execSQL(
+                "CREATE INDEX IF NOT EXISTS `index_dining_orders_status` ON `dining_orders` (`status`)"
+            )
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `dining_order_items` (
+                    `id` TEXT NOT NULL,
+                    `orderId` TEXT NOT NULL,
+                    `menuItemId` TEXT NOT NULL,
+                    `itemTitle` TEXT NOT NULL,
+                    `unitPrice` INTEGER NOT NULL,
+                    `quantity` INTEGER NOT NULL,
+                    `categoryName` TEXT NOT NULL,
+                    PRIMARY KEY(`id`),
+                    FOREIGN KEY(`orderId`) REFERENCES `dining_orders`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+                )
+                """.trimIndent()
+            )
+            db.execSQL(
+                "CREATE INDEX IF NOT EXISTS `index_dining_order_items_orderId` ON `dining_order_items` (`orderId`)"
+            )
+        }
+    }
+
     val ALL: Array<Migration> = arrayOf(
         MIGRATION_2_3,
-        MIGRATION_3_4
+        MIGRATION_3_4,
+        MIGRATION_4_5
     )
 }
