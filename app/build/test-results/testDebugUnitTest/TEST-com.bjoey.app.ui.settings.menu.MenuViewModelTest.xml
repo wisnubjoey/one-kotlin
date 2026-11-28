@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bjoey.app.ui.settings.menu.MenuViewModelTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-26T06:51:42" hostname="Bjoey-Mac.local" time="0.123">
+<testsuite name="com.bjoey.app.ui.settings.menu.MenuViewModelTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-28T06:10:01" hostname="Bjoey-Mac.local" time="0.02">
   <properties/>
-  <testcase name="categoryAndSearchFilters_filterMenuItems" classname="com.bjoey.app.ui.settings.menu.MenuViewModelTest" time="0.108"/>
-  <testcase name="addCategoryAndMenuCrud_updatesRoomDaoState" classname="com.bjoey.app.ui.settings.menu.MenuViewModelTest" time="0.01"/>
-  <testcase name="initialState_loadsSeededCategoriesAndItems" classname="com.bjoey.app.ui.settings.menu.MenuViewModelTest" time="0.005"/>
+  <testcase name="categoryAndSearchFilters_filterMenuItems" classname="com.bjoey.app.ui.settings.menu.MenuViewModelTest" time="0.009"/>
+  <testcase name="addCategoryAndMenuCrud_updatesRoomDaoState" classname="com.bjoey.app.ui.settings.menu.MenuViewModelTest" time="0.007"/>
+  <testcase name="initialState_loadsSeededCategoriesAndItems" classname="com.bjoey.app.ui.settings.menu.MenuViewModelTest" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

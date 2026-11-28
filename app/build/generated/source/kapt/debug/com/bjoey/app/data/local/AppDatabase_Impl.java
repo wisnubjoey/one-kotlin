@@ -13,6 +13,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import com.bjoey.app.data.local.dao.MenuDao;
 import com.bjoey.app.data.local.dao.MenuDao_Impl;
+import com.bjoey.app.data.local.dao.OrderDao;
+import com.bjoey.app.data.local.dao.OrderDao_Impl;
 import com.bjoey.app.data.local.dao.ShiftDao;
 import com.bjoey.app.data.local.dao.ShiftDao_Impl;
 import com.bjoey.app.data.local.dao.TableDao;
@@ -39,10 +41,12 @@ public final class AppDatabase_Impl extends AppDatabase {
 
   private volatile TableDao _tableDao;
 
+  private volatile OrderDao _orderDao;
+
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(4) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(5) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `shifts` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `pin` TEXT NOT NULL, `isActive` INTEGER NOT NULL)");
@@ -51,8 +55,13 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("CREATE TABLE IF NOT EXISTS `menu_items` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `price` INTEGER NOT NULL, `categoryId` TEXT NOT NULL, `imageUri` TEXT, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`categoryId`) REFERENCES `menu_categories`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_menu_items_categoryId` ON `menu_items` (`categoryId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `dining_tables` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `dining_orders` (`id` TEXT NOT NULL, `orderNumber` INTEGER NOT NULL, `tableId` TEXT NOT NULL, `tableName` TEXT NOT NULL, `guestCount` INTEGER NOT NULL, `shiftSessionId` TEXT NOT NULL, `status` TEXT NOT NULL, `paymentMethod` TEXT, `subtotal` INTEGER NOT NULL, `taxAmount` INTEGER NOT NULL, `grandTotal` INTEGER NOT NULL, `cashReceived` INTEGER, `changeAmount` INTEGER, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `closedAt` INTEGER, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_dining_orders_tableId` ON `dining_orders` (`tableId`)");
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_dining_orders_status` ON `dining_orders` (`status`)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `dining_order_items` (`id` TEXT NOT NULL, `orderId` TEXT NOT NULL, `menuItemId` TEXT NOT NULL, `itemTitle` TEXT NOT NULL, `unitPrice` INTEGER NOT NULL, `quantity` INTEGER NOT NULL, `categoryName` TEXT NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`orderId`) REFERENCES `dining_orders`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_dining_order_items_orderId` ON `dining_order_items` (`orderId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f64b07ed43a71b80bcade231d74ff58c')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b2c8415c734cc4271c905aa83b28850a')");
       }
 
       @Override
@@ -62,6 +71,8 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("DROP TABLE IF EXISTS `menu_categories`");
         db.execSQL("DROP TABLE IF EXISTS `menu_items`");
         db.execSQL("DROP TABLE IF EXISTS `dining_tables`");
+        db.execSQL("DROP TABLE IF EXISTS `dining_orders`");
+        db.execSQL("DROP TABLE IF EXISTS `dining_order_items`");
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
           for (RoomDatabase.Callback _callback : _callbacks) {
@@ -179,9 +190,56 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoDiningTables + "\n"
                   + " Found:\n" + _existingDiningTables);
         }
+        final HashMap<String, TableInfo.Column> _columnsDiningOrders = new HashMap<String, TableInfo.Column>(16);
+        _columnsDiningOrders.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("orderNumber", new TableInfo.Column("orderNumber", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("tableId", new TableInfo.Column("tableId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("tableName", new TableInfo.Column("tableName", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("guestCount", new TableInfo.Column("guestCount", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("shiftSessionId", new TableInfo.Column("shiftSessionId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("status", new TableInfo.Column("status", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("paymentMethod", new TableInfo.Column("paymentMethod", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("subtotal", new TableInfo.Column("subtotal", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("taxAmount", new TableInfo.Column("taxAmount", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("grandTotal", new TableInfo.Column("grandTotal", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("cashReceived", new TableInfo.Column("cashReceived", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("changeAmount", new TableInfo.Column("changeAmount", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("updatedAt", new TableInfo.Column("updatedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrders.put("closedAt", new TableInfo.Column("closedAt", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysDiningOrders = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesDiningOrders = new HashSet<TableInfo.Index>(2);
+        _indicesDiningOrders.add(new TableInfo.Index("index_dining_orders_tableId", false, Arrays.asList("tableId"), Arrays.asList("ASC")));
+        _indicesDiningOrders.add(new TableInfo.Index("index_dining_orders_status", false, Arrays.asList("status"), Arrays.asList("ASC")));
+        final TableInfo _infoDiningOrders = new TableInfo("dining_orders", _columnsDiningOrders, _foreignKeysDiningOrders, _indicesDiningOrders);
+        final TableInfo _existingDiningOrders = TableInfo.read(db, "dining_orders");
+        if (!_infoDiningOrders.equals(_existingDiningOrders)) {
+          return new RoomOpenHelper.ValidationResult(false, "dining_orders(com.bjoey.app.data.local.entity.DiningOrderEntity).\n"
+                  + " Expected:\n" + _infoDiningOrders + "\n"
+                  + " Found:\n" + _existingDiningOrders);
+        }
+        final HashMap<String, TableInfo.Column> _columnsDiningOrderItems = new HashMap<String, TableInfo.Column>(7);
+        _columnsDiningOrderItems.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrderItems.put("orderId", new TableInfo.Column("orderId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrderItems.put("menuItemId", new TableInfo.Column("menuItemId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrderItems.put("itemTitle", new TableInfo.Column("itemTitle", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrderItems.put("unitPrice", new TableInfo.Column("unitPrice", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrderItems.put("quantity", new TableInfo.Column("quantity", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDiningOrderItems.put("categoryName", new TableInfo.Column("categoryName", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysDiningOrderItems = new HashSet<TableInfo.ForeignKey>(1);
+        _foreignKeysDiningOrderItems.add(new TableInfo.ForeignKey("dining_orders", "CASCADE", "NO ACTION", Arrays.asList("orderId"), Arrays.asList("id")));
+        final HashSet<TableInfo.Index> _indicesDiningOrderItems = new HashSet<TableInfo.Index>(1);
+        _indicesDiningOrderItems.add(new TableInfo.Index("index_dining_order_items_orderId", false, Arrays.asList("orderId"), Arrays.asList("ASC")));
+        final TableInfo _infoDiningOrderItems = new TableInfo("dining_order_items", _columnsDiningOrderItems, _foreignKeysDiningOrderItems, _indicesDiningOrderItems);
+        final TableInfo _existingDiningOrderItems = TableInfo.read(db, "dining_order_items");
+        if (!_infoDiningOrderItems.equals(_existingDiningOrderItems)) {
+          return new RoomOpenHelper.ValidationResult(false, "dining_order_items(com.bjoey.app.data.local.entity.DiningOrderItemEntity).\n"
+                  + " Expected:\n" + _infoDiningOrderItems + "\n"
+                  + " Found:\n" + _existingDiningOrderItems);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "f64b07ed43a71b80bcade231d74ff58c", "09e6d6d53aa9a72b9688531cfcacf3a0");
+    }, "b2c8415c734cc4271c905aa83b28850a", "008aa8bd1c6e91d8ed38762b7a632e67");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -192,7 +250,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "shifts","shift_sessions","menu_categories","menu_items","dining_tables");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "shifts","shift_sessions","menu_categories","menu_items","dining_tables","dining_orders","dining_order_items");
   }
 
   @Override
@@ -213,6 +271,8 @@ public final class AppDatabase_Impl extends AppDatabase {
       _db.execSQL("DELETE FROM `menu_items`");
       _db.execSQL("DELETE FROM `menu_categories`");
       _db.execSQL("DELETE FROM `dining_tables`");
+      _db.execSQL("DELETE FROM `dining_orders`");
+      _db.execSQL("DELETE FROM `dining_order_items`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -233,6 +293,7 @@ public final class AppDatabase_Impl extends AppDatabase {
     _typeConvertersMap.put(ShiftDao.class, ShiftDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(MenuDao.class, MenuDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(TableDao.class, TableDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(OrderDao.class, OrderDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -289,6 +350,20 @@ public final class AppDatabase_Impl extends AppDatabase {
           _tableDao = new TableDao_Impl(this);
         }
         return _tableDao;
+      }
+    }
+  }
+
+  @Override
+  public OrderDao orderDao() {
+    if (_orderDao != null) {
+      return _orderDao;
+    } else {
+      synchronized(this) {
+        if(_orderDao == null) {
+          _orderDao = new OrderDao_Impl(this);
+        }
+        return _orderDao;
       }
     }
   }

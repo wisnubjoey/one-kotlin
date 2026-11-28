@@ -29,6 +29,7 @@ import com.bjoey.app.ui.HeartbeatMonitorScreen
 import com.bjoey.app.ui.PinLoginScreen
 import com.bjoey.app.ui.SyncLogItem
 import com.bjoey.app.ui.settings.SettingsScreen
+import com.bjoey.app.ui.settings.history.HistoryNavigation
 import com.bjoey.app.ui.settings.menu.MenuNavigation
 import com.bjoey.app.ui.settings.table.TableNavigation
 import kotlinx.coroutines.Dispatchers
@@ -107,6 +108,7 @@ class MainActivity : ComponentActivity() {
                             var showSettingsScreen by remember { mutableStateOf(false) }
                             var showMenuScreen by remember { mutableStateOf(false) }
                             var showTableScreen by remember { mutableStateOf(false) }
+                            var showHistoryScreen by remember { mutableStateOf(false) }
                             var isOnline by remember { mutableStateOf<Boolean?>(null) }
                             var lastSyncTime by remember { mutableStateOf("-") }
                             var countdown by remember { mutableIntStateOf(10) }
@@ -179,10 +181,17 @@ class MainActivity : ComponentActivity() {
                                         onBackClick = { showTableScreen = false }
                                     )
                                 }
+                                showHistoryScreen -> {
+                                    HistoryNavigation(
+                                        orderDao = database.orderDao(),
+                                        onBackClick = { showHistoryScreen = false }
+                                    )
+                                }
                                 showSettingsScreen -> {
                                     SettingsScreen(
                                         onBackClick = { showSettingsScreen = false },
                                         onMenuClick = { showMenuScreen = true },
+                                        onHistoryClick = { showHistoryScreen = true },
                                         onTableClick = { showTableScreen = true }
                                     )
                                 }
@@ -220,6 +229,9 @@ class MainActivity : ComponentActivity() {
                                         session = currentSession,
                                         isOnline = isOnline,
                                         isPaused = isPaused,
+                                        tableDao = database.tableDao(),
+                                        menuDao = database.menuDao(),
+                                        orderDao = database.orderDao(),
                                         onOpenMonitorClick = { showMonitorScreen = true },
                                         onOpenSettingsClick = { showSettingsScreen = true },
                                         onOpenMenuClick = { showMenuScreen = true },

@@ -105,8 +105,7 @@ public final class TableDao_Impl implements TableDao {
   }
 
   @Override
-  public Object insertTable(final DiningTableEntity table,
-      final Continuation<? super Unit> $completion) {
+  public Object insertTable(final DiningTableEntity table, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -120,12 +119,12 @@ public final class TableDao_Impl implements TableDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
   public Object insertTables(final List<DiningTableEntity> tables,
-      final Continuation<? super Unit> $completion) {
+      final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -139,12 +138,11 @@ public final class TableDao_Impl implements TableDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object updateTable(final DiningTableEntity table,
-      final Continuation<? super Unit> $completion) {
+  public Object updateTable(final DiningTableEntity table, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -158,11 +156,11 @@ public final class TableDao_Impl implements TableDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object deleteTableById(final String id, final Continuation<? super Unit> $completion) {
+  public Object deleteTableById(final String id, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -187,7 +185,7 @@ public final class TableDao_Impl implements TableDao {
           __preparedStmtOfDeleteTableById.release(_stmt);
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
@@ -237,8 +235,7 @@ public final class TableDao_Impl implements TableDao {
   }
 
   @Override
-  public Object getTableById(final String id,
-      final Continuation<? super DiningTableEntity> $completion) {
+  public Object getTableById(final String id, final Continuation<? super DiningTableEntity> arg1) {
     final String _sql = "SELECT * FROM dining_tables WHERE id = ? LIMIT 1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -283,11 +280,11 @@ public final class TableDao_Impl implements TableDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object countTables(final Continuation<? super Integer> $completion) {
+  public Object countTables(final Continuation<? super Integer> arg0) {
     final String _sql = "SELECT COUNT(*) FROM dining_tables";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
@@ -315,7 +312,7 @@ public final class TableDao_Impl implements TableDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg0);
   }
 
   @NonNull

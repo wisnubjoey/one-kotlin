@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bjoey.app.ui.settings.table.TableItemHelpersTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-26T06:51:43" hostname="Bjoey-Mac.local" time="0.001">
+<testsuite name="com.bjoey.app.ui.settings.table.TableItemHelpersTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-28T06:10:01" hostname="Bjoey-Mac.local" time="0.0">
   <properties/>
-  <testcase name="isValidTableName_rejectsBlankStrings" classname="com.bjoey.app.ui.settings.table.TableItemHelpersTest" time="0.001"/>
+  <testcase name="isValidTableName_rejectsBlankStrings" classname="com.bjoey.app.ui.settings.table.TableItemHelpersTest" time="0.0"/>
   <testcase name="normalizeTableName_trimsWhitespace" classname="com.bjoey.app.ui.settings.table.TableItemHelpersTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
